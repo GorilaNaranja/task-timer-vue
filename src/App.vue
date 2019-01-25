@@ -8,35 +8,40 @@
 </template>
 
 <script>
-import GlobalHeader from './components/GlobalHeader.vue'
-import TaskCreator from './components/TaskCreator.vue'
-import TaskManager from './components/TaskManager.vue'
+import GlobalHeader from "./components/GlobalHeader.vue";
+import TaskCreator from "./components/TaskCreator.vue";
+import TaskManager from "./components/TaskManager.vue";
 
 export default {
-  name: 'app',
+  name: "app",
+
   components: {
     appGlobalHeader: GlobalHeader,
     appTaskCreator: TaskCreator,
     appTaskManager: TaskManager
   },
-  data: function(){
+
+  data: function() {
     return {
-      tasks:[]
-    }
-  }, methods:{
-    newTask(task){
+      tasks: []
+    };
+  },
+
+  methods: {
+    newTask(task) {
       this.tasks.push(task);
     },
-    deleteTask(index){
-      this.tasks.splice(index, 1);
+
+    deleteTask(id) {
+      this.tasks = this.tasks.filter(task => task.id !== id);
     }
   }
-}
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

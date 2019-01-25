@@ -13,8 +13,7 @@
       <div class="column-15">
         <label> Format time </label>
         <b-select placeholder="Select a time" v-model="selected">
-          <option
-            v-for="(format, index) in formats" :value="format">
+          <option v-for="(format, index) in formats" :key="index" :value="format">
             {{ format.name }}
           </option>
         </b-select>
@@ -27,62 +26,65 @@
 </template>
 
 <script>
+import uuidv4 from "uuid/v4";
+
 export default {
-  data: function(){
+  data: function() {
     return {
-      msg:'',
-      time:0,
-      selected:{},
-      formats:[
+      msg: "",
+      time: 0,
+      selected: {},
+      formats: [
         {
-          name:'miliseconds',
-          multiplier:1
-        },{
-          name:'seconds',
-          multiplier:1000
-        },{
-          name:'minutes',
-          multiplier:60000
+          name: "miliseconds",
+          multiplier: 1
+        },
+        {
+          name: "seconds",
+          multiplier: 1000
+        },
+        {
+          name: "minutes",
+          multiplier: 60000
         }
       ]
-    }
-  }, methods:{
-    createTask: function(){
-      this.$emit('addTask',
-        {
-          name:this.msg,
-          time:this.time,
-          multiplier: this.selected.multiplier
-        }
-      );
-      // this.msg='';
-      // this.time=0;
+    };
+  },
+
+  methods: {
+    createTask() {
+      this.$emit("addTask", {
+        id: uuidv4(),
+        name: this.msg,
+        time: this.time,
+        multiplier: this.selected.multiplier
+      });
     }
   }
-}
+};
 </script>
 
 <style>
-.box-divider{
-  display:flex;
+.box-divider {
+  display: flex;
   width: 100%;
 }
-.column-15{
+.column-15 {
   width: 15%;
   margin: 10px;
 }
-.column-55{
+.column-55 {
   width: 55%;
   margin: 10px;
 }
-.column-rest{
-  width:auto;
-  margin:10px;
-  align-self:flex-end;
+.column-rest {
+  width: auto;
+  margin: 10px;
+  align-self: flex-end;
 }
-.creator-box{
+.creator-box {
   background: #f6f6f6;
-  padding:10px;
-  margin:10px;
+  padding: 10px;
+  margin: 10px;
 }
 </style>
