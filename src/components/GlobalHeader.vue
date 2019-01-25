@@ -6,9 +6,6 @@
 
 <script>
 export default {
-  props:['tasks']
-}
+  props: ["tasks"]
+};
 </script>
-
-<style>
-</style>
